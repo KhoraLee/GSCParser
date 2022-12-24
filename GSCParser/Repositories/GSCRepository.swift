@@ -23,8 +23,8 @@ open class GSCRepository {
     var result = nendoroid
     let nendoroidJA = await getNendoroidInfo(locale: .ja, number: nendoroid.num, productID: nendoroid.gscProductNum)
     let nendoroidEN = await getNendoroidInfo(locale: .en, number: nendoroid.num, productID: nendoroid.gscProductNum)
-    if nendoroidJA != nil { try? result.merge(with: nendoroidJA!) }
-    if nendoroidEN != nil { try? result.merge(with: nendoroidEN!) }
+    if nendoroidJA != nil { result.merge(with: nendoroidJA!) }
+    if nendoroidEN != nil { result.merge(with: nendoroidEN!) }
     return result
   }
 

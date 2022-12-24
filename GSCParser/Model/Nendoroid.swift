@@ -68,10 +68,10 @@ public struct Nendoroid: Base, Hashable {
 }
 
 extension Nendoroid {
-  public mutating func merge(with new: Nendoroid) throws {
+  public mutating func merge(with new: Nendoroid) {
     if num != new.num { return }
-    try name.join(new.name)
-    try series.join(new.series)
+    name.join(new.name)
+    series.join(new.series)
     if price == -1 { price = new.price }
     if releaseDate.isEmpty { releaseDate = new.releaseDate }
     if gender == nil { gender = new.gender }

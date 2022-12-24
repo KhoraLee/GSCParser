@@ -8,6 +8,5 @@
 import Foundation
 
 enum GSCError: Error {
-  case alreadyHaveValue
   case keyValueSizeMismatch
 }

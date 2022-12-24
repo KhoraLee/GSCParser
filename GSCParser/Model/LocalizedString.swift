@@ -28,17 +28,14 @@ public struct LocalizedString: Codable {
   var ja: String?
   var ko: String?
 
-  mutating func join(_ new: LocalizedString) throws {
-    if (new.en != nil && en != nil) || (new.ja != nil && ja != nil) || (new.ko != nil && ko != nil) {
-      throw GSCError.alreadyHaveValue
-    }
-    if new.en != nil {
+  mutating func join(_ new: LocalizedString) {
+    if en == nil, new.en != nil {
       en = new.en
     }
-    if new.ja != nil {
+    if ja == nil, new.ja != nil {
       ja = new.ja
     }
-    if new.ko != nil {
+    if ko == nil, new.ko != nil {
       ko = new.ko
     }
   }
