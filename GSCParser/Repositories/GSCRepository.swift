@@ -78,7 +78,7 @@ open class GSCRepository {
           var list = Set<Nendoroid>()
           do {
             let range = String(format: "%03d-%d", (i - 1) * 100 + (i == 1 ? 0 : 1), i * 100)
-            let request = AF.request(GSCRouter.byRange(locale: locale, range: range)).serializingString()
+            let request = GSC.request(GSCRouter.byRange(locale: locale, range: range)).serializingString()
             let doc = try SwiftSoup.parse(await request.value)
             let elements = try doc.select("div.hitItem").select("div > a")
             for e in elements {
@@ -105,7 +105,7 @@ open class GSCRepository {
         group.addTask {
           var list = Set<Nendoroid>()
           do {
-            let request = AF.request(GSCRouter.byYear(locale: locale, type: type, year: year)).serializingString()
+            let request = GSC.request(GSCRouter.byYear(locale: locale, type: type, year: year)).serializingString()
             let doc = try SwiftSoup.parse(await request.value)
             let elements = try doc
               .select("[class=\"hitItem nendoroid nendoroid_series\"], [class=\"hitItem nendoroid_series\"]")
@@ -224,7 +224,7 @@ open class GSCRepository {
   }
 
   private func getProductInfo(locale: LanguageCode, productID: Int) async throws -> String {
-    let request = AF.request(GSCRouter.productInfo(locale: locale, productID: productID)).serializingString()
+    let request = GSC.request(GSCRouter.productInfo(locale: locale, productID: productID)).serializingString()
     return try await request.value
   }
 

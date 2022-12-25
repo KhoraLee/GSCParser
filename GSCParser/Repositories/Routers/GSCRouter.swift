@@ -33,6 +33,7 @@ public enum GSCRouter: URLRequestConvertible {
     var request = URLRequest(url: url)
     request.method = method
     request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
+    request.timeoutInterval = 10
     return request
   }
 
