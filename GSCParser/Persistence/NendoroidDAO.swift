@@ -22,6 +22,14 @@ public class NendoroidDAO: BaseDAO {
       fatalError("NendoroidDAO is already setuped.")
     }
     staticPath = path
+
+    // Check sub directory exist and if not create
+    for range in 0...20 {
+      let folderName = String(format: "%04d-%04d", range * 100, (range + 1) * 100 - 1)
+      let folder = staticPath!.appendingPathComponent(folderName)
+      createFolderWhenNotExist(folder: folder)
+    }
+    createFolderWhenNotExist(folder: staticPath!.appendingPathComponent("Set"))
   }
 
   public func loadNendoroid(number num: String) throws -> Nendoroid {

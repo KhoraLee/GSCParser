@@ -27,6 +27,12 @@ extension BaseDAO {
     return Self.staticPath!
   }
 
+  static func createFolderWhenNotExist(folder: URL) {
+    if !FileManager.default.fileExists(atPath: folder.absoluteString) {
+      try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+    }
+  }
+
   func saveFile(data: some Encodable, to path: String) throws {
     let url = self.path.appending(path: path)
     let encoder = JSONEncoder()
@@ -37,5 +43,4 @@ extension BaseDAO {
   func loadFile<T>(at url: URL) throws -> T where T: Decodable {
     try JSONDecoder().decode(T.self, from: Data(contentsOf: url))
   }
-
 }
