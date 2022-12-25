@@ -20,6 +20,7 @@
 		B11CE9BE2942406B00C3B063 /* GSCRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11CE9BD2942406B00C3B063 /* GSCRouter.swift */; };
 		B11CE9C229434A3000C3B063 /* UnicodeScalar+EAW.swift in Sources */ = {isa = PBXBuildFile; fileRef = B11CE9C129434A3000C3B063 /* UnicodeScalar+EAW.swift */; };
 		B140A07C29582AFD008FD5A1 /* GSCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140A07B29582AFD008FD5A1 /* GSCSession.swift */; };
+		B140A07E2958A77C008FD5A1 /* BaseDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B140A07D2958A77C008FD5A1 /* BaseDAO.swift */; };
 		B183BC7A295768E5003B2217 /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = B183BC79295768E5003B2217 /* SwiftCSV */; };
 		B183BC7C29577055003B2217 /* CSVRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B183BC7B29577055003B2217 /* CSVRepository.swift */; };
 		B185EA6B294490F000A3F069 /* GSCRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B185EA6A294490F000A3F069 /* GSCRepository.swift */; };
@@ -76,6 +77,7 @@
 		B11CE9BD2942406B00C3B063 /* GSCRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCRouter.swift; sourceTree = "<group>"; };
 		B11CE9C129434A3000C3B063 /* UnicodeScalar+EAW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnicodeScalar+EAW.swift"; sourceTree = "<group>"; };
 		B140A07B29582AFD008FD5A1 /* GSCSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCSession.swift; sourceTree = "<group>"; };
+		B140A07D2958A77C008FD5A1 /* BaseDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDAO.swift; sourceTree = "<group>"; };
 		B183BC7B29577055003B2217 /* CSVRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVRepository.swift; sourceTree = "<group>"; };
 		B185EA6A294490F000A3F069 /* GSCRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCRepository.swift; sourceTree = "<group>"; };
 		B185EA6C2944964B00A3F069 /* GSCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSCError.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		B183BC772956D392003B2217 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				B140A07D2958A77C008FD5A1 /* BaseDAO.swift */,
 				B11CE9AC2939FC3400C3B063 /* NendoroidDAO.swift */,
 			);
 			path = Persistence;
@@ -476,6 +479,7 @@
 				B1FDF32D29449B78004083A0 /* ParserHelper.swift in Sources */,
 				B140A07C29582AFD008FD5A1 /* GSCSession.swift in Sources */,
 				B11CE9A52939F56100C3B063 /* Nendoroid.swift in Sources */,
+				B140A07E2958A77C008FD5A1 /* BaseDAO.swift in Sources */,
 				B183BC7C29577055003B2217 /* CSVRepository.swift in Sources */,
 				B11CE9C229434A3000C3B063 /* UnicodeScalar+EAW.swift in Sources */,
 				B11CE9AD2939FC3400C3B063 /* NendoroidDAO.swift in Sources */,
