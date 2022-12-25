@@ -43,6 +43,16 @@ public struct Nendoroid: Base, Hashable {
   public var set: Int?
   public var gender: Gender?
 
+  // MARK: Internal
+
+  enum CodingKeys: String, CodingKey {
+    case num, name, series, price, image, gender, set
+    case gscProductNum = "gsc_productNum"
+    case releaseDate = "release_date"
+  }
+}
+
+extension Nendoroid {
   public static func == (lhs: Nendoroid, rhs: Nendoroid) -> Bool {
     lhs.num == rhs.num && lhs.gscProductNum == rhs.gscProductNum
   }
@@ -58,16 +68,10 @@ public struct Nendoroid: Base, Hashable {
     return "\(folderName)/\(num).json"
   }
 
-  // MARK: Internal
-
-  enum CodingKeys: String, CodingKey {
-    case num, name, series, price, image, gender, set
-    case gscProductNum = "gsc_productNum"
-    case releaseDate = "release_date"
+  public func save() throws {
+    try NendoroidDAO.shared.saveFile(data: self, to: location())
   }
-}
 
-extension Nendoroid {
   public mutating func merge(with new: Nendoroid) {
     if num != new.num { return }
     name.join(new.name)

@@ -11,10 +11,5 @@ import Foundation
 
 public protocol Base: Codable {
   func location() -> String
-}
-
-extension Base {
-  public func save() throws {
-    try NendoroidDAO.shared.saveFile(data: self, to: location())
-  }
+  func save() throws
 }
