@@ -6,8 +6,10 @@
 //
 
 public struct LocalizedString: Codable {
-
-    // MARK: Lifecycle
+    
+    private var en: String?
+    private var ja: String?
+    private var ko: String?
 
     public init() { }
 
@@ -21,13 +23,24 @@ public struct LocalizedString: Codable {
             en = string
         }
     }
-
-    // MARK: Internal
-
-    var en: String?
-    var ja: String?
-    var ko: String?
-
+    
+    public init(_ strings: [LanguageCode: String]) {
+        for (langCode, string) in strings {
+            insert(string, to: langCode)
+        }
+    }
+    
+    mutating func insert(_ string: String, to: LanguageCode) {
+        switch to {
+        case .en:
+            en = string
+        case .ja:
+            ja = string
+        case .ko:
+            ko = string
+        }
+    }
+    
     mutating func join(_ new: LocalizedString, overwrite: [LanguageCode] = []) {
         if overwrite.contains(.en) || (en == nil && new.en != nil) {
             en = new.en
