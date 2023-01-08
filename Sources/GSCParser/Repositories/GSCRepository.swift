@@ -58,7 +58,7 @@ open class GSCRepository {
 
     // MARK: Private
 
-    private let convertionDict = [
+    let convertionDict = [
         "商品名" : "name",
         "Product Name" : "name",
         "作品名" : "series",
@@ -224,7 +224,7 @@ open class GSCRepository {
         }
     }
 
-    private func getProductInfo(locale: LanguageCode, productID: Int) async throws -> String {
+    func getProductInfo(locale: LanguageCode, productID: Int) async throws -> String {
         let request = GSC.request(GSCRouter.productInfo(locale: locale, productID: productID)).serializingString()
         return try await request.value
     }
