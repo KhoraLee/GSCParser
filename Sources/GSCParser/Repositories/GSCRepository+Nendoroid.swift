@@ -59,7 +59,7 @@ public extension GSCRepository {
                     var list = Set<Nendoroid>()
                     do {
                         let range = String(format: "%03d-%d", (i - 1) * 100 + (i == 1 ? 0 : 1), i * 100)
-                        let request = Requester.request(GSCRouter.byRange(locale: locale, range: range)).serializingString()
+                        let request = Requester.request(NendoroidRouter.byRange(locale: locale, range: range)).serializingString()
                         let doc = try SwiftSoup.parse(await request.value)
                         let elements = try doc.select("div.hitItem").select("div > a")
                         for e in elements {
@@ -79,14 +79,14 @@ public extension GSCRepository {
         }
     }
 
-    private func getNendoroidListbyYear(locale: LanguageCode, by type: GSCRouter.SortType) async -> Set<Nendoroid> {
+    private func getNendoroidListbyYear(locale: LanguageCode, by type: NendoroidRouter.SortType) async -> Set<Nendoroid> {
         await withTaskGroup(of: Set<Nendoroid>.self) { group in
             var nendoroids = Set<Nendoroid>()
             for year in 2005...2024 {
                 group.addTask {
                     var list = Set<Nendoroid>()
                     do {
-                        let request = Requester.request(GSCRouter.byYear(locale: locale, type: type, year: year)).serializingString()
+                        let request = Requester.request(NendoroidRouter.byYear(locale: locale, type: type, year: year)).serializingString()
                         let doc = try SwiftSoup.parse(await request.value)
                         let elements = try doc
                             .select("[class=\"hitItem nendoroid nendoroid_series\"], [class=\"hitItem nendoroid_series\"]")

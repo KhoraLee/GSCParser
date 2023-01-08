@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct NendoroidDoll: Base, Hashable {
+public struct NendoroidDoll: Figure, Hashable {
     
     // MARK: Lifecycle
 

@@ -42,14 +42,14 @@ public extension GSCRepository {
         await parseNendoroidDollList(option: [option])
     }
 
-    private func getNendoroidDollListbyYear(locale: LanguageCode, by type: GSCRouter.SortType) async -> Set<NendoroidDoll> {
+    private func getNendoroidDollListbyYear(locale: LanguageCode, by type: NendoroidRouter.SortType) async -> Set<NendoroidDoll> {
         await withTaskGroup(of: Set<NendoroidDoll>.self) { group in
             var nendoroids = Set<NendoroidDoll>()
             for year in 2005...2024 {
                 group.addTask {
                     var list = Set<NendoroidDoll>()
                     do {
-                        let request = Requester.request(GSCRouter.byYear(locale: locale, type: type, year: year)).serializingString()
+                        let request = Requester.request(NendoroidRouter.byYear(locale: locale, type: type, year: year)).serializingString()
                         let doc = try SwiftSoup.parse(await request.value)
                         let elements = try doc
                             .select("[class=\"hitItem nendoroidDoll nendoroid_series\"]")

@@ -7,7 +7,7 @@
 
 // MARK: - NendoroidSet
 
-public struct NendoroidSet: Base {
+public struct NendoroidSet: Figure {
     public let num: String
     public var setName: String
     public var list: [String]

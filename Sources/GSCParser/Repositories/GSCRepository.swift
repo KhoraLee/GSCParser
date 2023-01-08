@@ -32,7 +32,7 @@ open class GSCRepository {
     ]
 
     func getProductInfo(locale: LanguageCode, productID: Int) async throws -> String {
-        let request = Requester.request(GSCRouter.productInfo(locale: locale, productID: productID)).serializingString()
+        let request = Requester.request(NendoroidRouter.productInfo(locale: locale, productID: productID)).serializingString()
         return try await request.value
     }
 

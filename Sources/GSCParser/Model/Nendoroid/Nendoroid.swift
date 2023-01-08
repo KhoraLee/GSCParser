@@ -7,7 +7,7 @@
 
 // MARK: - Nendoroid
 
-public struct Nendoroid: Base, Hashable {
+public struct Nendoroid: Figure, Hashable {
 
     // MARK: Lifecycle
 

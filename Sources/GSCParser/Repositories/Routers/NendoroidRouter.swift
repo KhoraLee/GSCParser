@@ -1,5 +1,5 @@
 //
-//  GSCRouter.swift
+//  NendoroidRouter.swift
 //  GSCParser
 //
 //  Created by 이승윤 on 2022/12/09.
@@ -8,7 +8,7 @@
 import Alamofire
 import Foundation
 
-public enum GSCRouter: URLRequestConvertible {
+public enum NendoroidRouter: URLRequestConvertible {
 
     case byYear(locale: LanguageCode, type: SortType, year: Int)
     case byRange(locale: LanguageCode, range: String)
