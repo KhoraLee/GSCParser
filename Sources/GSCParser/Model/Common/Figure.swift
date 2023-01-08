@@ -9,7 +9,15 @@ import Foundation
 
 // MARK: - Base
 
-public protocol Figure: Codable {
+protocol Figure: Codable {
+    
+    var productID: Int { get set }
+    var image: String { get set }
+    var name: LocalizedString { get set }
+    var series: LocalizedString { get set }
+    var price: Int { get set }
+    var releaseDate: [String] { get set }
+
     func location() -> String
     func save() throws
 }

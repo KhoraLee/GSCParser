@@ -7,14 +7,14 @@
 
 import Foundation
 
-public struct NendoroidDoll: Figure, Hashable {
+public struct NendoroidDoll: Figure {
     
     // MARK: Lifecycle
 
     public init(
         name: LocalizedString = LocalizedString(),
         series: LocalizedString = LocalizedString(),
-        gscProductNum: Int = -1,
+        productID: Int = -1,
         price: Int = -1,
         releaseDate: [String] = [],
         image: String = "",
@@ -23,7 +23,7 @@ public struct NendoroidDoll: Figure, Hashable {
     {
         self.name = name
         self.series = series
-        self.gscProductNum = gscProductNum
+        self.productID = productID
         self.price = price
         self.releaseDate = releaseDate
         self.image = image
@@ -36,7 +36,7 @@ public struct NendoroidDoll: Figure, Hashable {
     public var image: String
     public var releaseDate: [String]
     public var name, series: LocalizedString
-    public var gscProductNum, price: Int
+    public var productID, price: Int
     public var gender: Gender?
     public var type: DollType?
 
@@ -44,22 +44,22 @@ public struct NendoroidDoll: Figure, Hashable {
 
     enum CodingKeys: String, CodingKey {
         case name, series, price, image, gender, type
-        case gscProductNum = "gsc_productNum"
+        case productID = "gsc_productNum"
         case releaseDate = "release_date"
     }
 }
 
-extension NendoroidDoll {
+extension NendoroidDoll: Hashable {
     public static func == (lhs: NendoroidDoll, rhs: NendoroidDoll) -> Bool {
-        lhs.gscProductNum == rhs.gscProductNum
+        lhs.productID == rhs.productID
     }
 
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(gscProductNum)
+        hasher.combine(productID)
     }
 
     public func location() -> String {
-        "\(type ?? .unknown)/\(gscProductNum).json"
+        "\(type ?? .unknown)/\(productID).json"
     }
 
     public func save() throws {
@@ -67,7 +67,7 @@ extension NendoroidDoll {
     }
 
     public mutating func merge(with new: NendoroidDoll) {
-        if gscProductNum != new.gscProductNum { return }
+        if productID != new.productID { return }
         name.join(new.name)
         series.join(new.series)
         if image == "" { image = new.image }

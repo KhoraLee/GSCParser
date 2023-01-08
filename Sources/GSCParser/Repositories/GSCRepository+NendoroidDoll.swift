@@ -13,8 +13,8 @@ public extension GSCRepository {
     
     func getNendoroidDollInfo(doll: NendoroidDoll) async -> NendoroidDoll {
         var result = doll
-        let dollJA = await getNendoroidDollInfo(locale: .ja, productID: doll.gscProductNum)
-        let dollEN = await getNendoroidDollInfo(locale: .en, productID: doll.gscProductNum)
+        let dollJA = await getNendoroidDollInfo(locale: .ja, productID: doll.productID)
+        let dollEN = await getNendoroidDollInfo(locale: .en, productID: doll.productID)
         if dollJA != nil { result.merge(with: dollJA!) }
         if dollEN != nil { result.merge(with: dollEN!) }
         return result
@@ -57,7 +57,7 @@ public extension GSCRepository {
                         for e in elements {
                             guard let gscCode = try String(e.attr("href").replacingOccurrences(of: "https://www.goodsmile.info/\(locale)/product", with: "").split(separator: "/").first!).toInt() else { continue }
                             let imageLink = try "https:" + e.select("img").attr("data-original")
-                            list.insert(NendoroidDoll(gscProductNum: gscCode, image: imageLink))
+                            list.insert(NendoroidDoll(productID: gscCode, image: imageLink))
                         }
                     } catch {
                         print(error.localizedDescription)
@@ -99,7 +99,7 @@ public extension GSCRepository {
             return NendoroidDoll(
                 name: LocalizedString(locale: locale, string: info["name"]!),
                 series: LocalizedString(locale: locale, string: info["series"]!),
-                gscProductNum: productID,
+                productID: productID,
                 price: info["price"]?.replacing("\\D", with: "").toInt() ?? 0,
                 releaseDate: Array(releaseDates).sorted())
         } catch {

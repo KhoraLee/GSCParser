@@ -12,8 +12,8 @@ public extension GSCRepository {
     
     func getNendoroidInfo(nendoroid: Nendoroid) async -> Nendoroid {
         var result = nendoroid
-        let nendoroidJA = await getNendoroidInfo(locale: .ja, number: nendoroid.num, productID: nendoroid.gscProductNum)
-        let nendoroidEN = await getNendoroidInfo(locale: .en, number: nendoroid.num, productID: nendoroid.gscProductNum)
+        let nendoroidJA = await getNendoroidInfo(locale: .ja, number: nendoroid.num, productID: nendoroid.productID)
+        let nendoroidEN = await getNendoroidInfo(locale: .en, number: nendoroid.num, productID: nendoroid.productID)
         if nendoroidJA != nil { result.merge(with: nendoroidJA!) }
         if nendoroidEN != nil { result.merge(with: nendoroidEN!) }
         return result
@@ -37,7 +37,7 @@ public extension GSCRepository {
             // 1522-DX is missing on all three above. So need to added manually
             list.insert(Nendoroid(
                 num: "1522-DX",
-                gscProductNum: 10257,
+                productID: 10257,
                 image: "https://images.goodsmile.info/cgm/images/product/20201020/10257/77495/thumb/878c6adf472a36a232fdb8085534dd4b.jpg"))
             for await sets in group {
                 list.formUnion(sets)
@@ -121,7 +121,7 @@ public extension GSCRepository {
                     .first!)
                 .toInt() else { return nil }
         let imageLink = try "https:" + element.select("img").attr("data-original")
-        return Nendoroid(num: num, gscProductNum: gscCode, image: imageLink)
+        return Nendoroid(num: num, productID: gscCode, image: imageLink)
     }
 
     private func getNendoroidInfo(locale: LanguageCode, number: String, productID: Int) async -> Nendoroid? {
@@ -196,7 +196,7 @@ public extension GSCRepository {
                 num: number,
                 name: LocalizedString(locale: locale, string: info["name"]!),
                 series: LocalizedString(locale: locale, string: info["series"]!),
-                gscProductNum: productID,
+                productID: productID,
                 price: info["price"]?.replacing("\\D", with: "").toInt() ?? 0,
                 releaseDate: Array(releaseDates).sorted())
         } catch {

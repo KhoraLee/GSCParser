@@ -7,7 +7,7 @@
 
 // MARK: - Nendoroid
 
-public struct Nendoroid: Figure, Hashable {
+public struct Nendoroid: Figure {
 
     // MARK: Lifecycle
 
@@ -15,7 +15,7 @@ public struct Nendoroid: Figure, Hashable {
         num: String,
         name: LocalizedString = LocalizedString(),
         series: LocalizedString = LocalizedString(),
-        gscProductNum: Int = -1,
+        productID: Int = -1,
         price: Int = -1,
         releaseDate: [String] = [],
         image: String = "",
@@ -25,7 +25,7 @@ public struct Nendoroid: Figure, Hashable {
         self.num = num
         self.name = name
         self.series = series
-        self.gscProductNum = gscProductNum
+        self.productID = productID
         self.price = price
         self.releaseDate = releaseDate
         self.image = image
@@ -39,7 +39,7 @@ public struct Nendoroid: Figure, Hashable {
     public var image: String
     public var releaseDate: [String]
     public var name, series: LocalizedString
-    public var gscProductNum, price: Int
+    public var productID, price: Int
     public var set: Int?
     public var gender: Gender?
 
@@ -47,19 +47,19 @@ public struct Nendoroid: Figure, Hashable {
 
     enum CodingKeys: String, CodingKey {
         case num, name, series, price, image, gender, set
-        case gscProductNum = "gsc_productNum"
+        case productID = "gsc_productNum"
         case releaseDate = "release_date"
     }
 }
 
-extension Nendoroid {
+extension Nendoroid: Hashable {
     public static func == (lhs: Nendoroid, rhs: Nendoroid) -> Bool {
-        lhs.num == rhs.num && lhs.gscProductNum == rhs.gscProductNum
+        lhs.num == rhs.num && lhs.productID == rhs.productID
     }
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(num)
-        hasher.combine(gscProductNum)
+        hasher.combine(productID)
     }
 
     public func location() -> String {
