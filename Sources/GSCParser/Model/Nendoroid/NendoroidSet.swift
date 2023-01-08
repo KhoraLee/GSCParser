@@ -18,13 +18,3 @@ public struct NendoroidSet: Codable {
         self.list = list
     }
 }
-
-extension NendoroidSet {
-    public func location() -> String {
-        "Set/\(String(format: "Set%03d", num.toInt()!)).json"
-    }
-
-    public func save() throws {
-        try NendoroidDAO.shared.saveFile(data: self, to: location())
-    }
-}

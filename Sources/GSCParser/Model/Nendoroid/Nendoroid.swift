@@ -62,16 +62,6 @@ extension Nendoroid: Hashable {
         hasher.combine(productID)
     }
 
-    public func location() -> String {
-        let range = num.components(separatedBy: .decimalDigits.inverted).joined().toInt()! / 100
-        let folderName = String(format: "%04d-%04d", range * 100, (range + 1) * 100 - 1)
-        return "\(folderName)/\(num).json"
-    }
-
-    public func save() throws {
-        try NendoroidDAO.shared.saveFile(data: self, to: location())
-    }
-
     public mutating func merge(with new: Nendoroid) {
         if num != new.num { return }
         name.join(new.name)

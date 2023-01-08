@@ -18,6 +18,4 @@ protocol Figure: Codable {
     var price: Int { get set }
     var releaseDate: [String] { get set }
 
-    func location() -> String
-    func save() throws
 }

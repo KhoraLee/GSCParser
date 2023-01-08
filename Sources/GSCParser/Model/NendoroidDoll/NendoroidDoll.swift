@@ -58,14 +58,6 @@ extension NendoroidDoll: Hashable {
         hasher.combine(productID)
     }
 
-    public func location() -> String {
-        "\(type ?? .unknown)/\(productID).json"
-    }
-
-    public func save() throws {
-        try NendoroidDollDAO.shared.saveFile(data: self, to: location())
-    }
-
     public mutating func merge(with new: NendoroidDoll) {
         if productID != new.productID { return }
         name.join(new.name)

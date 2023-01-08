@@ -11,7 +11,7 @@ import SwiftSoup
 
 let GSC = GSCRepository.shared
 
-open class GSCRepository {
+final public class GSCRepository {
 
     public static let shared = GSCRepository()
     
