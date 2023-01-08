@@ -28,16 +28,20 @@ public struct LocalizedString: Codable {
     var ja: String?
     var ko: String?
 
-    mutating func join(_ new: LocalizedString) {
-        if en == nil, new.en != nil {
+    mutating func join(_ new: LocalizedString, overwrite: [LanguageCode] = []) {
+        if overwrite.contains(.en) || (en == nil && new.en != nil) {
             en = new.en
         }
-        if ja == nil, new.ja != nil {
+        if overwrite.contains(.ja) || (ja == nil && new.ja != nil) {
             ja = new.ja
         }
-        if ko == nil, new.ko != nil {
+        if overwrite.contains(.ko) || (ko == nil && new.ko != nil) {
             ko = new.ko
         }
+    }
+
+    mutating func join(_ new: LocalizedString, overwrite: LanguageCode) {
+        join(new, overwrite: [overwrite])
     }
 
     func localizedString(locale: LanguageCode) -> String? {
