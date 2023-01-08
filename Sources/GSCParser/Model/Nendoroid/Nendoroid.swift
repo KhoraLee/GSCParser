@@ -5,11 +5,15 @@
 //  Created by 이승윤 on 2022/12/02.
 //
 
-// MARK: - Nendoroid
-
 public struct Nendoroid: Figure {
-
-    // MARK: Lifecycle
+    
+    public let num: String
+    public var image: String
+    public var releaseDate: [String]
+    public var name, series: LocalizedString
+    public var productID, price: Int
+    public var set: Int?
+    public var gender: Gender?
 
     public init(
         num: String,
@@ -31,24 +35,6 @@ public struct Nendoroid: Figure {
         self.image = image
         self.gender = gender
         self.set = set
-    }
-
-    // MARK: Public
-
-    public let num: String
-    public var image: String
-    public var releaseDate: [String]
-    public var name, series: LocalizedString
-    public var productID, price: Int
-    public var set: Int?
-    public var gender: Gender?
-
-    // MARK: Internal
-
-    enum CodingKeys: String, CodingKey {
-        case num, name, series, price, image, gender, set
-        case productID = "gsc_productNum"
-        case releaseDate = "release_date"
     }
 }
 

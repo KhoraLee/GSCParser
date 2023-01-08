@@ -9,7 +9,12 @@ import Foundation
 
 public struct NendoroidDoll: Figure {
     
-    // MARK: Lifecycle
+    public var image: String
+    public var releaseDate: [String]
+    public var name, series: LocalizedString
+    public var productID, price: Int
+    public var gender: Gender?
+    public var type: DollType?
 
     public init(
         name: LocalizedString = LocalizedString(),
@@ -29,23 +34,6 @@ public struct NendoroidDoll: Figure {
         self.image = image
         self.gender = gender
         self.type = type
-    }
-
-    // MARK: Public
-
-    public var image: String
-    public var releaseDate: [String]
-    public var name, series: LocalizedString
-    public var productID, price: Int
-    public var gender: Gender?
-    public var type: DollType?
-
-    // MARK: Internal
-
-    enum CodingKeys: String, CodingKey {
-        case name, series, price, image, gender, type
-        case productID = "gsc_productNum"
-        case releaseDate = "release_date"
     }
 }
 

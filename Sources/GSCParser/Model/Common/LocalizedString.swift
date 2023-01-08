@@ -6,7 +6,6 @@
 //
 
 public struct LocalizedString: Codable {
-    
     private var en: String?
     private var ja: String?
     private var ko: String?

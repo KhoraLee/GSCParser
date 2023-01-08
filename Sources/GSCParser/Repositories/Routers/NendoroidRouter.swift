@@ -15,30 +15,6 @@ public enum NendoroidRouter: URLRequestConvertible {
     case productInfo(locale: LanguageCode, productID: Int)
     case smartStore(item: SmartStoreItemType, page: Int)
 
-    // MARK: Public
-
-    public enum SortType: String {
-        case announce = "announced"
-        case release = "released"
-    }
-
-    public enum SmartStoreItemType: String {
-        case nendoroid = "fc068adc735c4a4093dd9318b50c053b"
-        case nendoroidDoll = "f999ec7a41d641e3a7c3f3f21c430c6b"
-        case nendoroidDollClothes = "a1a190b4f513402bbf436800135044fb"
-    }
-
-    public func asURLRequest() throws -> URLRequest {
-        let url = baseURL.appendingPathComponent(path)
-        var request = URLRequest(url: url)
-        request.method = method
-        request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
-        request.timeoutInterval = 10
-        return request
-    }
-
-    // MARK: Internal
-
     var baseURL: URL {
         switch self {
         case .smartStore:
@@ -76,5 +52,25 @@ public enum NendoroidRouter: URLRequestConvertible {
         default:
             return [:]
         }
+    }
+
+    public enum SortType: String {
+        case announce = "announced"
+        case release = "released"
+    }
+
+    public enum SmartStoreItemType: String {
+        case nendoroid = "fc068adc735c4a4093dd9318b50c053b"
+        case nendoroidDoll = "f999ec7a41d641e3a7c3f3f21c430c6b"
+        case nendoroidDollClothes = "a1a190b4f513402bbf436800135044fb"
+    }
+
+    public func asURLRequest() throws -> URLRequest {
+        let url = baseURL.appendingPathComponent(path)
+        var request = URLRequest(url: url)
+        request.method = method
+        request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
+        request.timeoutInterval = 10
+        return request
     }
 }
