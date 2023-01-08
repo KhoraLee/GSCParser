@@ -8,31 +8,19 @@
 import Alamofire
 import Foundation
 
-// MARK: - GSCSession
-
-let GSC = GSCSession.shared.session
-
-// MARK: - GSCSession
+let Requester = GSCSession.shared.session
 
 class GSCSession {
-
-    // MARK: Lifecycle
 
     init() {
         session = Session(interceptor: Interceptor(retriers: [Retrier()]))
     }
 
-    // MARK: Internal
-
     var session: Session
-
-    // MARK: Fileprivate
 
     fileprivate static let shared = GSCSession()
 
 }
-
-// MARK: - Retrier
 
 class Retrier: RequestRetrier {
     func retry(

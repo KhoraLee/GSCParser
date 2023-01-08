@@ -11,12 +11,12 @@ import SwiftSoup
 
 public extension GSCRepository {
     
-    func getNendoroidDollInfo(nendoroid: NendoroidDoll) async -> NendoroidDoll {
-        var result = nendoroid
-        let nendoroidJA = await getNendoroidDollInfo(locale: .ja, productID: nendoroid.gscProductNum)
-        let nendoroidEN = await getNendoroidDollInfo(locale: .en, productID: nendoroid.gscProductNum)
-        if nendoroidJA != nil { result.merge(with: nendoroidJA!) }
-        if nendoroidEN != nil { result.merge(with: nendoroidEN!) }
+    func getNendoroidDollInfo(doll: NendoroidDoll) async -> NendoroidDoll {
+        var result = doll
+        let dollJA = await getNendoroidDollInfo(locale: .ja, productID: doll.gscProductNum)
+        let dollEN = await getNendoroidDollInfo(locale: .en, productID: doll.gscProductNum)
+        if dollJA != nil { result.merge(with: dollJA!) }
+        if dollEN != nil { result.merge(with: dollEN!) }
         return result
     }
     
@@ -37,6 +37,10 @@ public extension GSCRepository {
             return list
         }
     }
+    
+    func parseNendoroidDollList(option: ListParseOption) async -> Set<NendoroidDoll> {
+        await parseNendoroidDollList(option: [option])
+    }
 
     private func getNendoroidDollListbyYear(locale: LanguageCode, by type: GSCRouter.SortType) async -> Set<NendoroidDoll> {
         await withTaskGroup(of: Set<NendoroidDoll>.self) { group in
@@ -45,7 +49,7 @@ public extension GSCRepository {
                 group.addTask {
                     var list = Set<NendoroidDoll>()
                     do {
-                        let request = GSC.request(GSCRouter.byYear(locale: locale, type: type, year: year)).serializingString()
+                        let request = Requester.request(GSCRouter.byYear(locale: locale, type: type, year: year)).serializingString()
                         let doc = try SwiftSoup.parse(await request.value)
                         let elements = try doc
                             .select("[class=\"hitItem nendoroidDoll nendoroid_series\"]")
