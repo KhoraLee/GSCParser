@@ -13,25 +13,18 @@ public struct LocalizedString: Codable {
 
     public init() { }
 
-    public init(locale: LanguageCode, string: String) {
-        switch locale {
-        case .ko:
-            ko = string
-        case .ja:
-            ja = string
-        case .en:
-            en = string
-        }
-    }
-    
     public init(_ strings: [LanguageCode: String]) {
         for (langCode, string) in strings {
             insert(string, to: langCode)
         }
     }
     
-    mutating func insert(_ string: String, to: LanguageCode) {
-        switch to {
+    public init(locale: LanguageCode, string: String) {
+        self.init([locale: string])
+    }
+    
+    mutating func insert(_ string: String, to locale: LanguageCode) {
+        switch locale {
         case .en:
             en = string
         case .ja:
