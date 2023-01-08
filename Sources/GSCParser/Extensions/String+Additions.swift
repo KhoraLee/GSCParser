@@ -13,7 +13,7 @@ extension String {
     }
 
 
-    func replacing(regexString: String, with replacement: String) -> String {
+    func replacing(_ regexString: String, with replacement: String) -> String {
         if #available(macOS 13.0, iOS 16.0, *) {
             return self.replacing(try! Regex(regexString), with: replacement)
         } else {

@@ -96,7 +96,7 @@ public extension GSCRepository {
                 name: LocalizedString(locale: locale, string: info["name"]!),
                 series: LocalizedString(locale: locale, string: info["series"]!),
                 gscProductNum: productID,
-                price: info["price"]?.replacing(regexString: "\\D", with: "").toInt() ?? 0,
+                price: info["price"]?.replacing("\\D", with: "").toInt() ?? 0,
                 releaseDate: Array(releaseDates).sorted())
         } catch {
             print(error.localizedDescription)

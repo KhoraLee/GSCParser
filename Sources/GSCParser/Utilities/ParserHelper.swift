@@ -13,8 +13,8 @@ class ParserHelper {
             .replacingOccurrences(of: "年月", with: "/") // Because GSC product page have typo
             .replacingOccurrences(of: "年", with: "/")
             .replacingOccurrences(of: "月", with: "-")
-            .replacing(regexString: "\\d次", with: "")
-            .replacing(regexString: "[^\\d/-]", with: "")
+            .replacing("\\d次", with: "")
+            .replacing("[^\\d/-]", with: "")
             .split(separator: "-")
             .map { String($0) }
         return list.compactMap { element in
